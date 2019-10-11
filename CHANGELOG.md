@@ -13,9 +13,11 @@
 
 ## [ToDo]
 - Create basic .gitlab-ci.yml for pipeline for crawler
-- Create docker-compose.yml for crawler
+
 
 ## [Unreleased]
+### Added
+- Create docker-compose.yml for crawler
 
 ## [0.0.1] 2019-10-11
 ### Added
