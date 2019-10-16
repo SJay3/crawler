@@ -32,9 +32,9 @@ stagging:
   stage: stage
   when: manual
   only:
-    - /^dev/
-  except:
-    - branches
+    - dev
+  # except:
+  #   - branches
   tags:
     - stage
   script:
