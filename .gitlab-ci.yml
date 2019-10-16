@@ -32,7 +32,7 @@ stagging:
   stage: stage
   when: manual
   only:
-    - dev
+    - /^dev/
   except:
     - branches
   tags:
