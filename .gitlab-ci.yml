@@ -9,7 +9,7 @@ stages:
 
 test_crawler-engine:
   stage: test
-  image: python:3.7.4
+  image: python:3.7.4-alpine
   tags:
     - infra
   script:
