@@ -9,7 +9,7 @@ stages:
 
 test_crawler-engine:
   stage: test
-  image: python:3.7.4-alpine
+  image: python:3.7.4
   tags:
     - infra
   script:
@@ -18,6 +18,7 @@ test_crawler-engine:
     - python -m unittest discover -s tests/
     - coverage run -m unittest discover -s tests/
     - coverage report --include crawler/crawler.py
+  coverage: '/\d+%/'
 
 test_crawler-ui:
   stage: test
