@@ -1,0 +1,60 @@
+image: alpine:latest
+
+stages:
+  - test
+  - build
+  - review
+  - stage
+  - prod
+
+test:
+  stage: test
+  tags:
+    - infra
+  script:
+    - echo 'Test stage'
+
+build:
+  stage: build
+  tags:
+    - infra
+  script:
+    - echo 'Build stage'
+
+review:
+  stage: review
+  tags:
+    - infra
+  script:
+    - echo 'Review stage'
+
+stagging:
+  stage: stage
+  when: manual
+  only:
+    - dev
+  except:
+    - branches
+  tags:
+    - stage
+  script:
+    - echo 'Deploy to stage'
+  environment:
+    name: stage
+    url: https://stage.crawler.com
+
+production:
+  stage: prod
+  when: manual
+  only:
+    - tags
+    - master
+  except:
+    - branches
+  tags:
+    - prod
+  script:
+    - echo 'Deploy to prod'
+  environment:
+    name: prod
+    url: https://crawler.com
