@@ -12,10 +12,18 @@
   - [Security] для обновлений безопасности.
 
 ## [ToDo]
-- Create basic .gitlab-ci.yml for pipeline for crawler
-- Create docker-compose.yml for crawler
+- Create build stage in gitlab-ci
+- Create deploy to stagging
+- Create deploy for prod
+- Update readme how to work with gitlab
 
 ## [Unreleased]
+
+## [0.0.2] 2019-10-16
+### Added
+- Create docker-compose.yml for crawler
+- Create basic .gitlab-ci.yml for pipeline for crawler
+- Create test stage in gitlab-ci
 
 ## [0.0.1] 2019-10-11
 ### Added

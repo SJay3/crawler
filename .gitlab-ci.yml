@@ -1,0 +1,79 @@
+image: alpine:latest
+
+stages:
+  - test
+  - build
+  - review
+  - stage
+  - prod
+
+test_crawler-engine:
+  stage: test
+  image: python:3.7.4
+  tags:
+    - infra
+  script:
+    - cd crawler-engine &&
+      pip install -r requirements.txt -r requirements-test.txt
+    - python -m unittest discover -s tests/
+    - coverage run -m unittest discover -s tests/
+    - coverage report --include crawler/crawler.py
+  coverage: '/\d+%/'
+
+test_crawler-ui:
+  stage: test
+  image: python:3.7.4
+  tags:
+    - infra
+  script:
+    - cd crawler-ui &&
+      pip install -r requirements.txt -r requirements-test.txt
+    - python -m unittest discover -s tests/
+    - coverage run -m unittest discover -s tests/
+    - coverage report --include ui/ui.py
+  coverage: '/\d+%/'
+
+build:
+  stage: build
+  tags:
+    - infra
+  script:
+    - echo 'Build stage'
+
+review:
+  stage: review
+  tags:
+    - infra
+  script:
+    - echo 'Review stage'
+
+stagging:
+  stage: stage
+  when: manual
+  only:
+    - dev
+  # except:
+  #   - branches
+  tags:
+    - stage
+  script:
+    - echo 'Deploy to stage'
+  environment:
+    name: stage
+    url: https://stage.crawler.com
+
+production:
+  stage: prod
+  when: manual
+  only:
+    - tags
+    - master
+  # except:
+  #   - branches
+  tags:
+    - prod
+  script:
+    - echo 'Deploy to prod'
+  environment:
+    name: prod
+    url: https://crawler.com
