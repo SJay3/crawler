@@ -47,11 +47,10 @@ build_crawler-engine:
     - docker build -t
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID .
     - if [[ -n "$CI_COMMIT_TAG" ]];
-      then echo "$CI_COMMIT_TAG"
-      docker tag
+      then docker tag
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_TAG; fi
-    - docker push
+    - docker push $CI_REGISTRY_USER/crawler-engine
 
 build_crawler-ui:
   stage: build
@@ -70,7 +69,7 @@ build_crawler-ui:
       then docker tag
       $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
       $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_TAG; fi
-    - docker push
+    - docker push $CI_REGISTRY_USER/crawler-engine
 
 review:
   stage: review
