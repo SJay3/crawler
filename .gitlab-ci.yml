@@ -36,8 +36,8 @@ test_crawler-ui:
 build_crawler-engine:
   stage: build
   image: docker:19.03
-  services:
-    - name: docker:19.03-dind
+  # services:
+  #   - name: docker:19.03-dind
   tags:
     - infra
   before_script:
@@ -45,7 +45,7 @@ build_crawler-engine:
     - cd crawler-engine
   script:
     - docker build -t
-      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID .
     - if [[ -n $CI_COMMIT_TAG ]];
       then docker tag
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
@@ -55,8 +55,8 @@ build_crawler-engine:
 build_crawler-ui:
   stage: build
   image: docker:19.03
-  services:
-    - name: docker:19.03-dind
+  # services:
+  #   - name: docker:19.03-dind
   tags:
     - infra
   before_script:
@@ -64,7 +64,7 @@ build_crawler-ui:
     - cd crawler-ui
   script:
     - docker build -t
-      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID .
     - if [[ -n $CI_COMMIT_TAG ]];
       then docker tag
       $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
