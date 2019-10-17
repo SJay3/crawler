@@ -45,10 +45,10 @@ build_crawler-engine:
     - cd crawler-engine
   script:
     - docker build -t
-      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID .
+      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA .
     - if [[ -n "$CI_COMMIT_TAG" ]];
       then docker tag
-      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+      $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_TAG; fi
     - docker push $CI_REGISTRY_USER/crawler-engine
 
@@ -64,12 +64,12 @@ build_crawler-ui:
     - cd crawler-ui
   script:
     - docker build -t
-      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID .
+      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA .
     - if [[ -n "$CI_COMMIT_TAG" ]];
       then docker tag
-      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+      $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
       $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_TAG; fi
-    - docker push $CI_REGISTRY_USER/crawler-engine
+    - docker push $CI_REGISTRY_USER/crawler-ui
 
 review:
   stage: review
