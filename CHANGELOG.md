@@ -17,6 +17,8 @@
 - Update readme how to work with gitlab
 
 ## [Unreleased]
+
+## [0.0.3] 2019-10-17
 ### Added
 - Create build stage in gitlab-ci
 
