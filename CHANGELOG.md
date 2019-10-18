@@ -12,13 +12,17 @@
   - [Security] для обновлений безопасности.
 
 ## [ToDo]
-- Create deploy to stagging
-- Create deploy for prod
+- Create docker-compose.stage.yml for stage env
+- Create docker-compose.prod.yml for prod env
 
 
 ## [Unreleased]
+
+## [0.1.0] 2019-10-18
 ### Added
 - Update readme how to work with gitlab
+- Create deploy to stagging
+- Create deploy for prod
 
 ## [0.0.3] 2019-10-17
 ### Added

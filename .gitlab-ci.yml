@@ -88,11 +88,9 @@ stagging:
   stage: stage
   when: manual
   image: docker:19.03
-  services:
-    - name: docker:19.03-dind
   variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
+    # DOCKER_HOST: tcp://localhost:2375
+    # DOCKER_TLS_CERTDIR: ""
     # Compose vars
     COMPOSE_PROJECT_NAME: crawler
     USER_NAME: $CI_REGISTRY_USER
@@ -109,10 +107,8 @@ stagging:
     name: stage
     url: https://stage.crawler.com
   before_script:
-    - sudo curl -L 
-      "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" 
-      -o /usr/local/bin/docker-compose
-    - sudo chmod +x /usr/local/bin/docker-compose
+    - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
+    - pip install docker-compose
     - docker-compose --version
   script:
     - docker-compose up -d
@@ -121,12 +117,27 @@ stagging:
 production:
   stage: prod
   when: manual
+  image: docker:19.03
+  variables:
+    # DOCKER_HOST: tcp://localhost:2375
+    # DOCKER_TLS_CERTDIR: ""
+    # Compose vars
+    COMPOSE_PROJECT_NAME: crawler
+    USER_NAME: $CI_REGISTRY_USER
+    MONGO_VERSION: "3.2"
+    RABBIT_VERSION: "3.8"
+    CRAWLER_UI_VERSION: "$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    CRAWLER_ENGINE_VERSION: "$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
   only:
     - tags
   tags:
     - prod
-  script:
-    - echo 'Deploy to prod'
   environment:
     name: prod
     url: https://crawler.com
+  before_script:
+    - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
+    - pip install docker-compose
+    - docker-compose --version
+  script:
+    - docker-compose up -d
