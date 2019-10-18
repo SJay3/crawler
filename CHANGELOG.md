@@ -14,9 +14,11 @@
 ## [ToDo]
 - Create deploy to stagging
 - Create deploy for prod
-- Update readme how to work with gitlab
+
 
 ## [Unreleased]
+### Added
+- Update readme how to work with gitlab
 
 ## [0.0.3] 2019-10-17
 ### Added
