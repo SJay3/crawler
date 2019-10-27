@@ -12,7 +12,7 @@
   - [Security] для обновлений безопасности.
 
 ## [ToDo]
-
+- Add node-exporter
 
 ## [Unreleased]
 
