@@ -15,6 +15,8 @@
 
 
 ## [Unreleased]
+
+## [0.1.1] 2019-10-27
 ### Added
 - Create docker-compose.stage.yml for stage env
 - Create docker-compose.prod.yml for prod env
