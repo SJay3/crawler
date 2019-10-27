@@ -111,7 +111,7 @@ stagging:
     - pip install docker-compose
     - docker-compose --version
   script:
-    - docker-compose up -d
+    - docker-compose -f docker-compose.stage.yml up -d
 
 
 production:
@@ -140,4 +140,4 @@ production:
     - pip install docker-compose
     - docker-compose --version
   script:
-    - docker-compose up -d
+    - docker-compose -f docker-compose.prod.yml up -d
