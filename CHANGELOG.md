@@ -12,9 +12,14 @@
   - [Security] для обновлений безопасности.
 
 ## [ToDo]
-
+- Define networks in stage and prod
 
 ## [Unreleased]
+
+### [0.1.2] 2019-10-30
+### Added
+- Add node-exporter to stage and prod
+- Add mongodb-exporter to stage and prod
 
 ## [0.1.1] 2019-10-27
 ### Added

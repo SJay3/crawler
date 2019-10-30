@@ -28,5 +28,27 @@ services:
     ports:
       - "8000:8000"
 
+  node-exporter:
+    image: prom/node-exporter:v0.16.0
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    ports:
+      - "9100:9100"
+
+  mongodb-exporter:
+    image: ${USER_NAME}/mongodb-exporter:crawler
+    command:
+      - '--mongodb.uri=mongodb://mongo_db'
+      - '--collect.database'
+    ports:
+      - "9216:9216"
+
 volumes:
   crawler_db:
