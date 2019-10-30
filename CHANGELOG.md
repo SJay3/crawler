@@ -15,6 +15,8 @@
 - Define networks in stage and prod
 
 ## [Unreleased]
+
+## [0.1.3] 2019-10-30
 ### Changed
 - Use custom image with docker-compose
 - Create buildinfo in builds
