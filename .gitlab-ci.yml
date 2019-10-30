@@ -87,7 +87,8 @@ review:
 stagging:
   stage: stage
   when: manual
-  image: docker:19.03
+  # image: docker:19.
+  image: $CI_REGISTRY_USER/docker-compose:crawler
   variables:
     # DOCKER_HOST: tcp://localhost:2375
     # DOCKER_TLS_CERTDIR: ""
@@ -107,8 +108,8 @@ stagging:
     name: stage
     url: https://stage.crawler.com
   before_script:
-    - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
-    - pip install docker-compose
+    # - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
+    # - pip install docker-compose
     - docker-compose --version
   script:
     - docker-compose -f docker-compose.stage.yml up -d
