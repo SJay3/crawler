@@ -46,6 +46,8 @@ build_crawler-engine:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - cd crawler-engine
+    - echo `git show --format="%h" HEAD | head -1` > build_info.txt
+    - echo `git rev-parse --abbrev-ref HEAD` >> build_info.txt
   script:
     - docker build -t
       $CI_REGISTRY_USER/crawler-engine:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA .
@@ -68,6 +70,8 @@ build_crawler-ui:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - cd crawler-ui
+    - echo `git show --format="%h" HEAD | head -1` > build_info.txt
+    - echo `git rev-parse --abbrev-ref HEAD` >> build_info.txt
   script:
     - docker build -t
       $CI_REGISTRY_USER/crawler-ui:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA .
@@ -87,7 +91,7 @@ review:
 stagging:
   stage: stage
   when: manual
-  image: docker:19.03
+  image: $CI_REGISTRY_USER/docker-compose:crawler
   variables:
     # DOCKER_HOST: tcp://localhost:2375
     # DOCKER_TLS_CERTDIR: ""
@@ -107,8 +111,8 @@ stagging:
     name: stage
     url: https://stage.crawler.com
   before_script:
-    - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
-    - pip install docker-compose
+    # - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
+    # - pip install docker-compose
     - docker-compose --version
   script:
     - docker-compose -f docker-compose.stage.yml up -d
@@ -117,7 +121,7 @@ stagging:
 production:
   stage: prod
   when: manual
-  image: docker:19.03
+  image: $CI_REGISTRY_USER/docker-compose:crawler
   variables:
     # DOCKER_HOST: tcp://localhost:2375
     # DOCKER_TLS_CERTDIR: ""
@@ -136,8 +140,8 @@ production:
     name: prod
     url: https://crawler.com
   before_script:
-    - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
-    - pip install docker-compose
+    # - apk add --update py-pip python-dev build-base libffi-dev openssl-dev
+    # - pip install docker-compose
     - docker-compose --version
   script:
     - docker-compose -f docker-compose.prod.yml up -d

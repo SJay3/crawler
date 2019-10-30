@@ -16,6 +16,11 @@
 
 ## [Unreleased]
 
+## [0.1.3] 2019-10-30
+### Changed
+- Use custom image with docker-compose
+- Create buildinfo in builds
+
 ### [0.1.2] 2019-10-30
 ### Added
 - Add node-exporter to stage and prod
